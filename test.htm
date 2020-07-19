@@ -1,0 +1,60 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.0.1/mustache.min.js" integrity="sha512-6AXIWogbKpsHvoZJrJtHpIYES4wP8czSj0zk7ZfwOYS8GWYFNSykwdfapt7yQc4ikZytemBu+QyVObzBHJMwYg==" crossorigin="anonymous"></script>
+  <script src="items.js"> </script>
+
+  <script id="template_header" type="text/html">
+    <div class="panel panel-default" >
+      <div class="panel-heading">
+          <h1>{{name}}</h1>
+      </div>
+    </div>
+</script>
+  <script id="template1" type="text/html">
+    <div class="panel panel-default" >
+      <div class="panel-heading">
+          <p>{{name}}</p>
+      </div>
+    </div>
+  </script>
+
+  <script type='text/javascript'>
+    function display(){
+      let data = items;
+      var build = "";
+      var header = document.getElementById("template_header").innerHTML;
+      var template = document.getElementById("template1").innerHTML;
+
+      for(let i = 0; i < data.length; i++){
+        console.log(data[i]["name"])
+        build += Mustache.render(header,data[i]);
+        for(j = 0; j < data[i].items.length; j++){
+          build += Mustache.render(template,data[i].items[j]);
+          //console.log(data[0].items[i])
+        }
+      }
+      document.getElementById("demo").innerHTML = build
+      /*
+      $.getJSON("main.js", function(data){
+        console.log(data)
+        var build = "";
+        var template = document.getElementById("template1").innerHTML;
+        for(i = 0; i < data.results.length; i++){
+          build += Mustache.render(template,data.items[i]);
+        }
+        document.getElementById("demo").innerHTML = build
+      });
+      */
+    }
+  </script>
+</head>
+<body onload="display()">
+  <div id="demo">
+
+  </div>
+</body>
+</html>

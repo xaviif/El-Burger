@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>El Burger</title>
+  <script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-rc.2/lazyload.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.0.1/mustache.min.js" integrity="sha512-6AXIWogbKpsHvoZJrJtHpIYES4wP8czSj0zk7ZfwOYS8GWYFNSykwdfapt7yQc4ikZytemBu+QyVObzBHJMwYg==" crossorigin="anonymous"></script>
+  <script src="items.js"> </script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <script>history.scrollRestoration = "manual"</script>
+  <!--TEMPLATES-->
+  <script id="template_header" type="text/html">
+    <div >
+      <div class="temp_heading">
+          <h1>{{name}}</h1>
+          <p>{{desc}}</p>
+      </div>
+    </div>
+  </script>
+
+  <script id="template1" type="text/html">
+    <div class="{{stylingClass}}">
+      <div class="temp_body_img" style="background-image:url('{{img_url}}');">
+
+      </div>
+      <div class="temp_body">
+          <div class="h3_cont"><h3>{{name}}</h3></div>
+          <div class="desc_cont"><p class="desc">{{description}}</p></div>
+          <div class="price_cont"><p class="price">${{price}}</p></div>
+          <div class="item_buy">
+            <input type="number" min="0" step="1" name="quantity" type="text" placeholder="Quantity"></input>
+            <button name="tocart" type="submit" > Add to cart </button>
+            
+          </div>
+      </div>
+    </div>
+  </script>
+  <!--------->
+
+</head>
+<body onload="start()">
+
+  <div id="body">
+    <div id="headSticky">
+      <ul class="navBar">
+        <li><i class="fa fa-bars " aria-hidden="true"></i>
+        </li>
+        <li style="letter-spacing: 0.15em;"><b>ELMBURGERS</b></li>
+        <li>
+          <ul class="navnav_items" id="nav_cart"> 
+            <li>Cart<i class="fa fa-shopping-cart"></i></li>
+            <li>Checkout></li>
+          </ul>
+        </li>
+        </li>
+
+      </ul>
+    </div>
+    <div id="head">
+      <ul class="navBar">
+        <li></li>
+        <li>
+          <ul class="navnav_items"> 
+            <li>Grilled</li>
+            <li>Bakery</li>
+            <li>About</li>
+          </ul>
+        </li>
+        <li>
+        </li>
+        </li>
+
+      </ul>
+    </div>
+    
+    <div id="topHeader_Text">
+      <p><u>Menu</u></p>
+    </div>
+
+    <center>
+    <section class="illusion" id="topImg">
+      
+    </section>
+    </center>
+
+    <div id="body_content">
+      <center>
+      <div id="menu_cont">
+        <div id="menu_cont_nav">
+          <ul id="menu_nav">
+            <li class="selected">View All</li>
+          </ul>
+        </div>
+        <div id="display_menu_cont">
+
+        </div>
+      </div>
+      </center>
+    </div>
+  </div>
+  
+  <div id="foot">
+
+  </div>
+  <div id="WhiteFull">
+
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+  <script src="main.js"></script>
+</body>
+</html>
