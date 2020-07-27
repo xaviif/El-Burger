@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <title>El Burger</title>
-  <script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-rc.2/lazyload.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.0.1/mustache.min.js" integrity="sha512-6AXIWogbKpsHvoZJrJtHpIYES4wP8czSj0zk7ZfwOYS8GWYFNSykwdfapt7yQc4ikZytemBu+QyVObzBHJMwYg==" crossorigin="anonymous"></script>
   <script src="items.js"> </script>
@@ -12,38 +11,61 @@
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/main.css">
   <script>history.scrollRestoration = "manual"</script>
-  <!--TEMPLATES-->
-  <script id="template_header" type="text/html">
-    <div >
-      <div class="temp_heading">
-          <h1>{{name}}</h1>
-          <p>{{desc}}</p>
-      </div>
-    </div>
-  </script>
 
+  <!--TEMPLATES-->
   <script id="template1" type="text/html">
-    <div class="{{stylingClass}}">
+    <div class="{{stylingClass}} menuItemCont">
       <div class="temp_body_img" style="background-image:url('{{img_url}}');">
 
       </div>
       <div class="temp_body">
-          <div class="h3_cont"><h3>{{name}}</h3></div>
-          <div class="desc_cont"><p class="desc">{{description}}</p></div>
-          <div class="price_cont"><p class="price">${{price}}</p></div>
-          <div class="item_buy">
-            <input type="number" min="0" step="1" name="quantity" type="text" placeholder="Quantity"></input>
-            <button name="tocart" type="submit" > Add to cart </button>
-            
-          </div>
+        <div class="h3_cont"><h3>{{name}}</h3></div>
+        <div class="desc_cont"><p class="desc">{{description}}</p></div>
+        <div class="price_cont"><p class="price">${{price}}</p></div>
+        <div class="item_buy">
+          <button name="tocart" type="submit" > Buy</button>
+          
+        </div>
       </div>
+      <div class="buying" id="{{productId}}">
+        <div class="hidden buyingParentCont">
+          <div id="buying_head">
+            <h4>Add to cart</h4>
+          </div>
+          <div class="buying_body_cont">
+            <div class="buying_body">
+              <div class="buyAmount">
+                <div class="buyAmountDiv"><p id="1" class="valueClickable selected">1</p></div>
+                <div class="buyAmountDiv"><p id="2" class="valueClickable">2</p></div>
+                <div class="buyAmountDiv"><p id="3" class="valueClickable">3</p></div>
+                <div class="buyAmountDiv"><p id="4" class="valueClickable">4</p></div>
+                <div class="buyAmountDiv"><p id="5" class="valueClickable">5</p></div>
+                <input class="valueClickable" id="custom" type="number" min="0" step="1" name="quantity" type="text" placeholder="6+"></input>
+              
+              </div>
+              <button class="cartSubmit" name="buyCart" type="submit" > Add to cart </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </script>
+
+  <!--Cart Item-->
+  <script id="cartItem" type="text/html">
+    <div class="cart_item">
+      <div class="cart_item_head">
+        <h1>{{name}}</h1>
+        <div><i id="cart_item_delete" class="fa fa-times" aria-hidden="true"></i></div>
+      </div>
+      <p id="price">${{price}}</p>
+      <p> Quantity: {{itemQuantity}}</p>
     </div>
   </script>
   <!--------->
 
 </head>
 <body onload="start()">
-
   <div id="body">
     <div id="headSticky">
       <ul class="navBar">
@@ -52,8 +74,7 @@
         <li style="letter-spacing: 0.15em;"><b>ELMBURGERS</b></li>
         <li>
           <ul class="navnav_items" id="nav_cart"> 
-            <li>Cart<i class="fa fa-shopping-cart"></i></li>
-            <li>Checkout></li>
+            <li><i class="fa fa-shopping-cart"></i></li>
           </ul>
         </li>
         </li>
@@ -103,13 +124,51 @@
     </div>
   </div>
   
+  <div id="pageShadow" class="cartClose">
+    <div id="cart_cont" class="cartClose">
+      <div id="cart_header">
+        <h3>Your Cart:</h3>
+        <div id="cartExitCont">
+          <i id="cartExit" class="fa fa-times fa-lg" aria-hidden="true"></i>
+     
+
+        </div>
+         </div>
+      <div id="cart_body">
+        <div id="cart_body_items">
+
+        </div>
+      </div>
+      <div id="cart_foot">
+        <div>
+          <button id="placeOrderBtn"> Buy </button>
+        </div>
+      </div>
+    </div>
+  </div>
   <div id="foot">
 
   </div>
   <div id="WhiteFull">
 
   </div>
+  <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-database.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyBbiSzEEjWl5c66eB_on1hYlpSPkvoshO8",
+      authDomain: "elmburg-609a1.firebaseapp.com",
+      databaseURL: "https://elmburg-609a1.firebaseio.com",
+      projectId: "elmburg-609a1",
+      storageBucket: "elmburg-609a1.appspot.com",
+      messagingSenderId: "692662077793",
+      appId: "1:692662077793:web:a026eeed6dbec4314c1d20",
+      measurementId: "G-VWY8PFVE5J"
+    };
+    firebase.initializeApp(firebaseConfig);
+  </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+  <script src="cart.js"></script>
   <script src="main.js"></script>
 </body>
 </html>

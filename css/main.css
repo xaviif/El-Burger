@@ -8,6 +8,93 @@
   margin: 0;
   padding: 0; }
 
+#pageShadow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 3;
+  transition: 0.2s;
+  transition-timing-function: ease-out; }
+  #pageShadow .cartOpen {
+    left: calc(100vw - 33vw); }
+  #pageShadow .cartClose {
+    left: 100vw; }
+
+.cartOpen {
+  background-color: rgba(0, 0, 0, 0.35); }
+
+.cartClose {
+  background-color: rgba(0, 0, 0, 0); }
+
+#cart_cont {
+  z-index: 4;
+  pointer-events: all;
+  position: fixed;
+  top: 0;
+  width: 33vw;
+  height: 100vw;
+  background-color: white;
+  transition: 0.2s;
+  transition-timing-function: ease-out;
+  font-family: 'Source Sans Pro', sans-serif; }
+  #cart_cont #cart_header {
+    background: #f6f5f3;
+    width: 100%;
+    border-bottom: 1px solid rgba(151, 141, 141, 0.2);
+    display: flex;
+    justify-content: space-between; }
+    #cart_cont #cart_header h3 {
+      flex: 1;
+      font-weight: bold;
+      letter-spacing: 1.5px;
+      padding: 2vh 1.2vw; }
+    #cart_cont #cart_header #cartExitCont {
+      flex: 1;
+      display: flex;
+      justify-content: flex-end; }
+      #cart_cont #cart_header #cartExitCont #cartExit {
+        padding-right: 2em;
+        cursor: pointer;
+        align-self: center; }
+  #cart_cont #cart_body #cart_body_items {
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    flex-flow: column; }
+    #cart_cont #cart_body #cart_body_items .cart_item {
+      margin: 0.5em 0;
+      flex: 1;
+      border-bottom: 1px solid rgba(151, 141, 141, 0.2);
+      padding: 1.05em 0; }
+      #cart_cont #cart_body #cart_body_items .cart_item .cart_item_head {
+        display: flex; }
+        #cart_cont #cart_body #cart_body_items .cart_item .cart_item_head h1 {
+          flex: 1;
+          font-size: x-large; }
+        #cart_cont #cart_body #cart_body_items .cart_item .cart_item_head div {
+          flex: 1;
+          display: flex;
+          justify-content: flex-end; }
+          #cart_cont #cart_body #cart_body_items .cart_item .cart_item_head div i {
+            display: flex;
+            justify-content: flex-end;
+            margin-right: 3em;
+            cursor: pointer;
+            flex: 1; }
+      #cart_cont #cart_body #cart_body_items .cart_item #price {
+        font-size: medium;
+        font-weight: bold;
+        color: #2f4f94; }
+    #cart_cont #cart_body #cart_body_items .cart_item:nth-child(1) {
+      margin-top: 0; }
+    #cart_cont #cart_body #cart_body_items .cart_item:last-child {
+      margin-bottom: 0;
+      border-bottom: none; }
+  #cart_cont #cart_foot {
+    border-top: 1px solid rgba(151, 141, 141, 0.2); }
+
 #WhiteFull {
   background: white;
   width: 100vw;
@@ -55,11 +142,13 @@
     padding-left: 2vw; }
   .navBar #nav_cart {
     padding: 0 7.5vw; }
+    .navBar #nav_cart li {
+      justify-content: flex-end; }
   .navBar .navnav_items {
     width: 100%;
     height: 100%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-end;
     list-style-type: none; }
     .navBar .navnav_items li {
       display: flex;
@@ -110,6 +199,48 @@
     #body #menu_cont #display_menu_cont .cont_featured_menu .featured_menu:hover .temp_body_img {
       background-position: center 75%;
       transition: 25s; }
+    #body #menu_cont #display_menu_cont .buying {
+      position: absolute; }
+      #body #menu_cont #display_menu_cont .buying .hidden {
+        clip-path: circle(0% at 50% 50%);
+        pointer-events: none; }
+      #body #menu_cont #display_menu_cont .buying .expanded {
+        clip-path: circle(100% at 50% 50%);
+        pointer-events: all; }
+      #body #menu_cont #display_menu_cont .buying .buyingParentCont {
+        transition: 0.205s;
+        transition-timing-function: ease-out;
+        background: #e9e0e0;
+        display: flex;
+        justify-content: space-evenly;
+        flex-flow: column; }
+        #body #menu_cont #display_menu_cont .buying .buyingParentCont .buying_body_cont .buying_body .buyAmount {
+          width: 80%;
+          height: 100%;
+          display: flex;
+          flex-flow: row; }
+          #body #menu_cont #display_menu_cont .buying .buyingParentCont .buying_body_cont .buying_body .buyAmount div {
+            flex: 1;
+            display: flex;
+            flex-flow: row;
+            justify-content: center; }
+            #body #menu_cont #display_menu_cont .buying .buyingParentCont .buying_body_cont .buying_body .buyAmount div p {
+              flex: 1;
+              align-self: center;
+              background: #dfd3d3;
+              border: 1px solid rgba(0, 0, 0, 0); }
+            #body #menu_cont #display_menu_cont .buying .buyingParentCont .buying_body_cont .buying_body .buyAmount div p:not(.selected):hover {
+              background: #d3cbcb;
+              transition: 0.1s;
+              padding: 0 1.5em; }
+          #body #menu_cont #display_menu_cont .buying .buyingParentCont .buying_body_cont .buying_body .buyAmount .selected:not(input) {
+            transition: 0.25s;
+            background: rgba(182, 163, 163, 0.3);
+            border: 1px solid rgba(0, 0, 0, 0.712);
+            padding: 0 2em; }
+          #body #menu_cont #display_menu_cont .buying .buyingParentCont .buying_body_cont .buying_body .buyAmount input {
+            min-width: 0;
+            flex: 1; }
     #body #menu_cont #display_menu_cont .cont_card {
       margin-top: 1em;
       display: flex;
@@ -240,24 +371,19 @@
         border-top: 1px solid rgba(151, 141, 141, 0.2);
         border-bottom: 1px solid rgba(151, 141, 141, 0.2);
         height: 50vh;
+        display: flex;
         /*.temp_body:hover{
           background: rgb(233, 229, 229);
           transition: 0.2s;
         }*/ }
         #body #menu_cont #display_menu_cont .cont_featured_menu .featured_menu .temp_body_img {
-          width: 100%;
-          height: 100%;
+          flex: 1 1 65%;
           background-position: center center;
           background-size: cover;
           background-repeat: no-repeat; }
         #body #menu_cont #display_menu_cont .cont_featured_menu .featured_menu .temp_body {
+          flex: 1 1 33%;
           transition: 0.5s;
-          position: relative;
-          top: -50vh;
-          left: 25vw;
-          height: 50vh;
-          width: 40vw;
-          margin-left: 5em;
           background: #f3f0f5;
           display: flex;
           flex-flow: column;

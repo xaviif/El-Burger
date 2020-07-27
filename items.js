@@ -4,6 +4,7 @@ let items = [{
   stylingClass: "featured_menu",
   items:[
     {
+      productId:"Burger",
       name: "Good Burger",
       price: "8.99",
       img_url: "./img/burgerBig.jpeg",
@@ -12,6 +13,7 @@ let items = [{
       stylingClass:"featured_menu"
     },
     {
+      productId:"HotDog",
       name: "Hot-Dog",
       price: "66.99",
       img_url: "./img/cookedFood.jpg",
@@ -27,6 +29,7 @@ let items = [{
   stylingClass:"card",
   items:[
     {
+      productId:"Concha",
       name: "Concha",
       price: "1.99",
       img_url: "./img/food.jpg",
@@ -35,7 +38,8 @@ let items = [{
       stylingClass:"card"
     },
     {
-      name: "cartuchera",
+      productId:"Cartuchera",
+      name: "Cartuchera",
       price: "11.99",
       img_url: "./img/leafyDish.jpg",
       img_title: "cartuchera",
@@ -43,6 +47,7 @@ let items = [{
       stylingClass:"card"
     },
     {
+      productId:"okBoomy",
       name: "ok boomy",
       price: "0.99",
       img_url: "./img/pancakes.jpg",
@@ -51,6 +56,7 @@ let items = [{
       stylingClass:"card"
     },
     {
+      productId:"Bread1",
       name:"BREAD ONE",
       price: "5.99",
       description: "AAAA BREAD",
@@ -62,6 +68,7 @@ let items = [{
   name:"Test",stylingClass: "featured_menu",
   items:[
     {
+      productId:"okBoomy123",
       name: "ok boomy123",
       price: "0.99",
       img_url: "./img/pasta.jpg",
