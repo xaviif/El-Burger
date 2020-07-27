@@ -163,43 +163,6 @@ function pageLoadCart(){
 let buyContEl;
 let itemsList = [];
 
-let showBuy = function(){
-  let bodyDivCont = $(this).parent().parent().parent();
-  buyContEl = $(bodyDivCont).children(".buying").children("div");
-  let bodyEl = $(bodyDivCont).children(".temp_body");
-  //$(buyContEl).children("div").css("height", `${$(bodyEl).css("height")}`);
-  $(buyContEl).toggleClass("hidden expanded");
-  
-
-  //console.log(buyCont);
-};
-
-function readyFunc(){
-  console.log("READY");
-  $(".buying").each(function( index ) {
-    let thisBuyEl = $(this);
-    let bodyEl = $(thisBuyEl).siblings(".temp_body");
-    $(thisBuyEl).css({
-      "width": `${$(bodyEl).css("width")}`,
-      "top": `${$(bodyEl).position().top}px`,
-      "left": `${$(bodyEl).position().left}px`,
-      "height": `${$(bodyEl).css("height")}`,
-      "pointer-events": "none"
-    });
-    $(thisBuyEl).children("div").css({
-      "height": `${$(bodyEl).css("height")}`,
-      "width": `${$(bodyEl).css("width")}`,
-    });
-  });
-}
-
-function mouseOut(){
-  //evt2.preventDefault();
-  //console.log(buyContEl, "1", $(buyContEl).children("div").attr('class'));
-  $(buyContEl).toggleClass("hidden expanded");
-  buyContEl = undefined;
-  //console.log(buyContEl, "2");
-}
 function pushToCart(){
   let parent = $("#cart_body_items");
   let template = document.getElementById("cartItem").innerHTML;
@@ -207,20 +170,6 @@ function pushToCart(){
 
   build += Mustache.render(template,data[i].items[j]);
   $(parent).append(template);
-}
-function updateCart(){
-  //Add to cart
-  buyContEl = $(this).parent().parent().parent();
-  let item = {
-    productId: $(buyContEl).parent().attr("id"),
-    quantity: $(this).parent().children("input").val(),
-  };
-  cart.push(item);
-  pushToCart();
-  buyContEl.toggleClass("hidden expanded");
-  buyContEl = undefined;
-  
-  console.log(cart);
 }
 function toggleCart(){
   $("#pageShadow").toggleClass("cartClose cartOpen");
@@ -301,30 +250,15 @@ function pageLoadCart(){
   });      
 }
 
-function checkId(){
-  if (localStorage.getItem('clientId')===null)
-    localStorage.setItem("clientId",Date.now());
-
-    curId = localStorage.getItem("clientId");
-}
-function deleteCartItem(){
-
-}
 let curId;
-
-window.onresize = readyFunc;
 window.addEventListener("beforeunload", saveCart);
-window.addEventListener('load', checkId);
 window.addEventListener("load", pageLoadCart);
-
 
 $("#nav_cart li i").click(toggleCart);
 
 $(document).on("mouseleave", ".menuItemCont", mouseOut);
-$(document).on("click", "#cartExit", toggleCart);
 $(document).on("click", "#cart_item_delete", deleteCartItem);
 
-$(document).on("click", '.cartSubmit', updateCart);
 */
 //$("#placeOrderBtn").click(PlaceOrder)
 /**

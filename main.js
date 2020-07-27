@@ -60,9 +60,13 @@ function buyButtonClicked(b, a){
     alert("invalid!");
   }
 }
-function selectToggle(){
 
+function toggleCart(){
+  $("#pageShadow").toggleClass("cartClose cartOpen");
+  $("#cart_cont").toggleClass("cartClose cartOpen");
 }
+$("#nav_cart li i").click(toggleCart);
+$("#cartExit").click(toggleCart);
 window.onresize = loadBuyDiv;
 
 $(document).on("mouseleave", ".menuItemCont", hideBuyDiv);
