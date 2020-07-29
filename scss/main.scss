@@ -72,9 +72,13 @@
       @include flex-center;
       flex:1;
       padding: 2.5vh 0px;
+      i{
+        display: flex;
+        justify-content: flex-end;
+        padding:5.5px;
+      }
     }
-    li:hover{
-
+    li i:hover{
       cursor: pointer;
     }
 
@@ -124,6 +128,7 @@
       width:100%;height:100%;
       .cont_featured_menu .featured_menu:hover{
         .temp_body_img{
+          transition-timing-function: ease-in;
           background-position: center 75%;transition: 25s;
           
         }
@@ -148,8 +153,13 @@
           display: flex;
           justify-content: space-evenly;
           flex-flow: column;
+          #buying_head{
+            font-family: 'Source Sans Pro', sans-serif;
+
+          }
           .buying_body_cont{
             .buying_body{
+              font-family: 'Montserrat', sans-serif;
               .buyAmount{
                 width: 80%; height: 100%;
                 display: flex;flex-flow: row;
@@ -168,11 +178,12 @@
                   p:not(.selected):hover{
                     background: rgb(211, 203, 203);
                     transition: 0.1s;
-                    padding: 0 1.5em;
+                    transition-timing-function: ease-out;
                   }
                 }
                 .selected:not(input){
                   transition: 0.25s;
+                  transition-timing-function: ease-out;
                   background: rgba(182, 163, 163, 0.3);
                   border: 1px solid rgba(0, 0, 0, 0.712);
                   padding: 0 2em;
@@ -209,6 +220,7 @@
           }
         }
         .card{
+          transition-timing-function: ease-out;
           transition: 1s;
           flex: 1 0 25%;
           margin: 0 2.5vw 1vw 2.5vw;
@@ -216,6 +228,7 @@
           box-shadow: rgba(151, 141, 141, 0.2) 0px 0px 1px 1px;
           .temp_body_img{
             transition: 2s;
+            transition-timing-function: ease-out;
             padding: 15vh 0;
             background-position: center center;
             background-size: cover; 
@@ -257,12 +270,7 @@
               align-items: flex-start;
               justify-content: center;
               padding: 0.25em 0 1.75em 0;
-              input{
-                font-family: 'Montserrat', sans-serif;
-                width:35%;
-                text-align: center;
-                font-weight: 600;
-              }
+              
               button{
                 font-family: 'Montserrat', sans-serif;
                 font-weight: 600;
@@ -357,6 +365,7 @@
             flex: 1 1 33%;
 
             transition: 0.5s;
+            transition-timing-function: ease-out;
             background: rgb(243, 240, 245);
             display: flex;
             flex-flow: column;

@@ -26,23 +26,6 @@ class Cart{
     return this.data.splice(index, 1); 
   }
 
-  fromDB(a){
-    let parent = this;
-    let dbCart = [];
-    rootRef.child(`userCarts/${a}/cart/`).once("value", (snapshot)=>{
-      snapshot.forEach((child)=>{
-        //Populate curItem with values, then push to cart
-        let curItem = [childJ.key, childJ.val()];
-        console.log()
-        child.forEach((childJ)=>{
-          curItem[childJ.key] = childJ.val();
-        });
-        dbCart.push(curItem);
-      });
-    }).then(()=>{
-      parent.addItems(dbCart);
-    });
-  }
 }
 
 
@@ -69,95 +52,59 @@ class User{
     if (localStorage.getItem('clientId')===null)
       localStorage.setItem("clientId",Date.now());
     this.id = localStorage.getItem("clientId");
+    this.total = 0;
+    this.totalItems = 0;
   }
   updateData(a){
-    console.log(a);
-    db.ref(`userCarts/${this.id}/cart`).set("");
-    for(let i in a){
-      //index aray
-      console.log(a[i]);
-      for(let j in a[i]){
-        let pId = a[i].productId;
-        let q = a[i].quantity || 0;
-        db.ref(`userCarts/${this.id}/cart/item${i}/productId`).set(pId);
-        db.ref(`userCarts/${this.id}/cart/item${i}/itemQuantity`).set(q);
-      }
-    }
+    /**
+     * a: array[];
+     */
+    db.ref(`userCarts/${this.id}/cart/`).set(a);
+    
   }
-  updateCart(a){
+  getCart(a){
+    let dbCart = [];
+    rootRef.child(`userCarts/${this.id}/cart/`).once("value", (snapshot)=>{
+      snapshot.forEach((child)=>{
+        dbCart.push(child.val());
+      });
+    }).then(()=>{
+      a(dbCart);
+      return dbCart;
+    });
+  }
+  loadCart(a){
+    //a is array
+    let xAr = [];
     for(let i in a){
-      console.log(a[i]);
-      for(const [key, value] of Object.entries(a[i])){
-        console.log(key, value);
+      //console.log(a[i]);
+      for(let j in items){
+        let foundItem = items[j].items.find(x => x.productId === a[i].productId);
+        let foundClone = {...foundItem};
+        
+        if(foundItem !== undefined){
+          foundClone.itemQuantity = a[i].quantity;
+          foundClone.indx = i;
+          foundClone.total = a[i].quantity * foundClone.price;
+          xAr.push(foundClone);
+          this.totalItems+=1;
+          this.total+=a[i].quantity * foundClone.price;
+        }else{
+          continue;
+        }
       }
     }
+    for(let i in a){
+      let template = document.getElementById("cartItemTemp").innerHTML;
+      $("#cart_body_items").append(Mustache.render(template,xAr[i]));
+    }
+    let headerHeight = $("#cart_header").outerHeight();
+    let contHeight = $("#cart_body_items").outerHeight();
+    let iconHeight = $("#scrollIcon").outerHeight();
+    $("#scrollIcon").css("top", headerHeight + contHeight - (iconHeight - 2));
   }
 }
 
-function pageLoadCart(){
-  let i = 0;
-  /*
-  //Load cart from db
-  rootRef.child(`${curId}/cart/`).once("value", function(snapshot){
-    snapshot.forEach(function(child) {
-      let cartCopy = [];
-      child.forEach(function(childJ) {
-        let childKey = childJ.key;
-        cartCopy.push({
-          //[childKey]: childJ.val()
-          key: childJ.key,
-          val: childJ.val()
-        });
-      });
-      cart[i] = cartCopy.reduce(function(map, obj) {
-        map[obj.key] = obj.val;
-        return map;
-      }, {});
-      i++;
-      console.log("okok")
-    });
-  }).then(()=>{
-    //Display cart to user
-    let data = items;
-    
-    for(var i in items){
-      for (var j in data[i].items) {
-        let pushData = {};
-        for(const [key, value] of Object.entries(data[i].items[j])){
-          if(!(key === "productId" || key === "price" ||  key === "name")){
-            continue;
-          }
-          if(key === "name"){
-            pushData[key] = value;
-            itemsList.push(pushData);
-          }else{
-            pushData[key] = value;
-          }
-        } 
-      }
-    }
-    let build = '';
-    let template = document.getElementById("cartItem").innerHTML;
-    console.log(itemsList);
-    console.log(cart);
-    for(let i in cart){
-      let arIndex = 0;
-      let target = cart[i].productId;
-      for(let j in itemsList){
-        //console.log(itemsList[j].productId, "aaaa", i, j);
-        if(itemsList[j].productId === target){
-          console.log(cart[i], "aa");
-          itemsList[j].itemQuantity = cart[i].itemQuantity;
-          build += Mustache.render(template, itemsList[j]);
-          break;
-        }
-        
-      }
-      console.log(itemsList);
-    }
-    document.getElementById("cart_body_items").innerHTML += build;
-  });      */
-}
 /*
 ///
 let buyContEl;
@@ -169,7 +116,7 @@ function pushToCart(){
   let build = "";
 
   build += Mustache.render(template,data[i].items[j]);
-  $(parent).append(template);
+   $("#cart_body_items")$(parent).append(template);
 }
 function toggleCart(){
   $("#pageShadow").toggleClass("cartClose cartOpen");
