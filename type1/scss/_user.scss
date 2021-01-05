@@ -1,0 +1,16 @@
+#nav_cart{
+  .hidden{
+    opacity: 0;
+    pointer-events: none;
+  }
+  .shown{
+    opacity: 1;
+    pointer-events: all;
+  }
+  .fa-user-box{
+    position: absolute;
+    top:5vh;
+    width:350px;height:450px;background:red;
+    transform: translate(-50%, 0); 
+  }
+}

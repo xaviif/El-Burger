@@ -1,0 +1,47 @@
+#cart_cont{
+  flex: 1;
+  align-self: stretch;
+  margin-right: $head-margin;
+  background: white;
+  width: 10vh;
+  display: flex;
+  justify-content: center;
+  #cart{
+    -webkit-box-shadow: 0px 2px 5px 0.2px darken($bkColor-body, 15%);
+    -moz-box-shadow: 0px 2px 5px 0.2px darken($bkColor-body, 15%);
+    box-shadow: 0px 2px 5px 0.2px darken($bkColor-body, 15%);
+    background: $bkColor-body;
+    border: 1px solid $bkColor-body;
+    width: 85%;
+    height: 55vh;
+    position: sticky;
+    top: 14vh;
+    .slidingCardCont{
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      &#pt1{
+        z-index: 2;
+        background: red;
+      }
+      &.pt2{
+        z-index: 1;
+        background: blue;
+
+      }
+      #title{
+        width: 100%;
+        padding: 1.75vh 0;
+        p{
+          font-family: 'Montserrat';
+          font-weight: bold;
+          font-size: 1.5em;
+          text-align: center;
+        }
+      }
+
+    }
+  }
+}

@@ -1,0 +1,140 @@
+body{
+  background: white;
+}
+#b_cont{
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  align-items: stretch;
+  #body{
+    margin-left: $head-margin;
+    flex: 1 1 $head-height;
+    background: $bkColor-body;
+    #body_dio_cont{
+      #body_dio_header{
+        font-family: 'Montserrat';
+        margin-left: 0.5vh;
+        padding: 2vh 0;
+        h4{
+          margin-left: 1vh;
+
+        }
+      }
+      #body_dio_info{
+        margin-left: 0.5vh;
+        font-family: 'Raleway';
+        padding: 2vh 0;
+      }
+    }
+    #menu_cont{
+      hr{
+        height: .1rem;
+        width: 100%;
+        margin: 0;
+        background: rgba(0, 0, 0, 0.192);
+        border: none;
+        transition: .3s ease-in-out;
+        margin: 0 0 2.5vh 0;
+
+      }
+      #clientServiceChoice{
+        padding: 5vh 0vw 0 0vw;
+        font-family: 'Raleway';
+        font-size: larger;
+        width: 25%;
+        white-space: nowrap;
+        li:first-child{
+          color: black;
+        }
+        li{ 
+          white-space: nowrap;
+          display: inline;
+          color: rgba(0, 0, 0, 0.3);
+          transition: .4s;
+          transition-timing-function: ease-out;
+          a{ 
+            display: inline-block;
+            width:  50%;
+            //padding: .75rem 0;
+            margin: 0;
+            text-decoration: none;
+          }
+        }
+        hr {
+          height: .25rem;
+          width: 50%;
+          margin: 0;
+          background: rgb(0, 75, 146);
+          border: none;
+          transition: .3s ease-in-out;
+        }
+      }
+      #menu{
+        margin-left: 0.5vw;
+        .menu_item_group:first-child{
+          h3{
+            padding: 5px 0 5px 0;
+          }
+        }
+        .menu_item_group{
+          display: flex;
+          flex-direction: column;
+          h3{
+            font-size: 2em;
+            padding: 35px 0 2px 0;
+            text-transform: uppercase;
+            font-family: 'Playfair Display';
+            font-weight: 400;
+            font-style: italic;
+            font-style: bold;
+          }
+          .itemCont{
+            padding: 1px 1vw;
+            .item:hover{
+              border-color: rgb(233, 221, 221);
+              background-color: rgb(233, 221, 221);
+              cursor: pointer;
+            }
+            .selected{
+              border-color: rgb(233, 221, 221);
+              background-color: rgb(233, 221, 221);
+            }
+            .item{
+              padding: 4px;
+              border: 1px solid transparent;
+              font-family: 'Montserrat';
+              .extended-info{
+              
+                &.collapsed{
+                  height: 0px;
+                  overflow: hidden;
+                }
+                &.extended{
+                  height: 100%; 
+                  overflow: hidden;
+
+                }
+              }
+              span{
+                display: flex;
+                h4{
+                  font-size: 20px;
+                  font-weight: 600; 
+                  text-transform: capitalize;
+                }
+                p{
+                  font-size: 20px;
+                }
+              }
+              p{
+                font-style: italic;
+                padding: 2px 0 5px 0;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
+}

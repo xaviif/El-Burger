@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ElmFood</title>
+  <link rel="stylesheet" href="css/main.css">
+  <script>history.scrollRestoration = "manual"</script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script id="itemTemplate" type="text/html">
+    <div class="itemCont">
+      <div class="item">
+        <div class="itemDescCont">
+          <span>
+            <h4><span class="productname">{{name}}</span> </h4><p> ...........................<span style="display:inline;" class="itemPrice">{{price}}</span></p>
+          </span>
+          <p>{{desc}}</p>
+        </div>
+        <div class="extended-info collapsed">
+            <div class="addtocart_cont">
+                <span id="addtocart_value">
+                    <input class="quantInput" type="number" min="1" max="5" value="1"/>
+                    <input class="quantSubmit" type="button" value="Add to cart" onclick="submitToCart(this)" />
+                </span>
+            </div>
+        </div>
+      </div>
+    </div>
+  </script>
+
+  <script id="cartItemTemplate" type="text/html">
+    <div class="cart_item_cont">
+      <div class="cart_item">
+        <div class="cart_item_title">
+          <p>{{name}}</p>
+        </div>
+        <div class="cart_item_body">
+          <div class="cart_item_quant">
+            <input type="number" value="{{quantity}}"/>
+          </div>
+          <p>${{subtotal}}</p>
+        </div>
+      </div>
+
+    </div>
+  </script>
+</head>
+<body id="body_cont">
+  <div id="head">
+    <div id="nav-head-cont">
+      
+      <ul id="nav-head" class="nav-cont">
+        <li id="leftmenu">
+          <i class="fa fa-bars fa-lg upright" aria-hidden="true"></i>
+        </li>
+        <li id="title">
+          <b>ELMBURGER</b>
+        </li>
+        <ul id="options" class="nav-cont">
+          <li><i class="fa fa-shopping-cart fa-lg " id="cart_btn"></i></li>
+          <li><i class="fa fa-user fa-lg " id="user_btn" aria-hidden="true"></i></li>
+        </ul>
+      </ul>
+    </div>
+    <div id="intro_cont">
+      <div id="intro_header_left">
+      </div>
+      <div id="intro_header_right">
+        <div id="intro_header_right_top">
+        </div>
+        <div id="intro_header_right_bottom">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="b_cont">
+    <div id="body">
+      <div id="body_dio_cont">
+        <div id="body_dio_header">
+          <h1>ElmBurgers by Dio</h1>
+          <h4>New York, NY - Mexican Food</h4>
+        </div>
+        <div id="body_dio_info">
+          <p>Integer vel consectetur tellus. <br>Nunc lacinia molestie mauris quis aliquet. Etiam ligula tellus, rutrum eget tempor nec, ultricies id metus.<br> <br> Cras ultricies consectetur diam, in mattis dolor pulvinar quis. <br><br>Phasellus maximus ante non odio egestas condimentum. Nam dictum sodales tortor a vestibulum. Proin in porttitor leo. Fusce nec lacinia metus, sit amet fermentum metus. <br><br> Cras volutpat magna massa, vestibulum dapibus ligula mollis iaculis.</p>
+          
+        </div>
+      </div>
+      <div id="menu_cont">
+        <!--<ul id="clientServiceChoice">
+          <li class="pickupChoice"><a>Pick-Up</a></li><li class="deliveryChoice"><a>Delivery</a></li>
+          <hr id="slider_choice"/>
+        <hr>
+        </ul>-->
+        <div id="menu"> 
+          
+        </div>
+      </div>
+    </div>
+    <div id="cart_cont">
+      <div id="cart">
+        <div id="pt1" class="slidingCardCont">
+          <div id="title">
+            <p>-<span id="title_span">Info</span>-</p>
+          </div>
+          <ul id="items">
+          </ul>
+        </div>
+        <div id="pt2" class="slidingCardCont pt2">
+          <div id="title" >
+            <p>-<span id="title_span">Info</span>-</p>
+          </div>
+          <ul id="items">
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.0.1/mustache.min.js" integrity="sha512-6AXIWogbKpsHvoZJrJtHpIYES4wP8czSj0zk7ZfwOYS8GWYFNSykwdfapt7yQc4ikZytemBu+QyVObzBHJMwYg==" crossorigin="anonymous"></script>
+  <script src="items.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
